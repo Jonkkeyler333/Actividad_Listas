@@ -6,9 +6,6 @@ class lista_enlazada:
          self.element=elemento
          self.next=next
          
-      def __str__(self) -> str:
-        return self.element+'->'+self.next
-           
     def __init__(self) -> None:
        self.head=None
        self.tail=None
@@ -28,7 +25,7 @@ class lista_enlazada:
       self.size+=1
       
     def get_head(self)->nodo:
-      pass
+      return str(self.head.element)+' apunta hacia ->'+str(self.head.next.element)
     
     def add_tail(self,elemento)->None:
       new_nodo=lista_enlazada.nodo(elemento,None)
@@ -45,7 +42,7 @@ class lista_enlazada:
       while current_nodo:
         cadena+=str(current_nodo.element)
         if current_nodo.next:
-          cadena+='->'
+          cadena+=' -> '
         current_nodo=current_nodo.next
       return cadena
       
@@ -60,7 +57,4 @@ if __name__=='__main__':
   l1.add_head(2000)
   l1.add_tail(21221)
   print(l1)
-  
-  
-      
-      
+  print(l1.get_head())
