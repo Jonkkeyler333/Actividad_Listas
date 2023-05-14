@@ -35,9 +35,13 @@ class lista_enlazada:
       self.size+=1
       
     def get_head(self)->nodo:
+      if self.is_empty():
+        raise Empty
       return str(self.head.element)+' apunta hacia ->'+str(self.head.next.element)
     
     def get_tail(self)->nodo:
+      if self.is_empty():
+        raise Empty
       return str(self.tail.element)
     
     def add_tail(self,elemento)->None:
@@ -70,6 +74,14 @@ class lista_enlazada:
       self.size-=1
       self.head=self.head.next
     
+    def pop(self)->nodo:
+      if self.is_empty():
+        raise Empty
+      self.size-=1
+      nodo=self.head
+      self.head=self.head.next
+      return nodo
+    
     def delete_tail(self)->None:
       if self.is_empty():
         raise Empty
@@ -80,7 +92,23 @@ class lista_enlazada:
       self.tail=current_nodo
       self.size-=1
       
+    def delete(self,element:any)->None:
+      if self.is_empty():
+        raise Empty
+      elif self.search(element)==None:
+        return 'No se encontró el Nodo'
+      current_nodo=self.head
+      while current_nodo.element != element:
+        aux=current_nodo
+        borr=current_nodo.next
+        current_nodo=current_nodo.next
+      aux2=aux.next.next
+      aux.next=aux2
+      return borr
+      
     def __str__(self) -> str:
+      if self.is_empty():
+        return None
       current_nodo=self.head
       cadena=''
       while current_nodo:
@@ -91,10 +119,19 @@ class lista_enlazada:
       return cadena
       
 if __name__=='__main__':
+  """Pruebas de la clase"""
   l1=lista_enlazada()
   print(l1.is_empty())
+  ##probando la excepción
+  try:
+    l1.delete_head()
+  except Empty:
+    print('excepción exitosa')
+    pass
+  ##agregar a la cabeza de la lista
   l1.add_head(2)
   l1.add_head(23)
+  l1.add_head('keyler')
   l1.add_head(3444)
   l1.add_head(2000)
   l1.add_tail(21221)
@@ -105,9 +142,13 @@ if __name__=='__main__':
   resultado2=l1.search(23)
   print(resultado,resultado2.element,sep='  ')
   print('tamaño de la lista',len(l1))
+  ##eliminando elementos
   l1.delete_head()
   print('elimine la cabeza , ahora el tamaño de la lista',len(l1))
   print(l1)
   l1.delete_tail()
   print(l1)
-  
+  nodoe=l1.delete('keyler')
+  print(l1,' //elemento eliminado = ',nodoe.element,)
+  l1.delete(2)
+  print(l1)
