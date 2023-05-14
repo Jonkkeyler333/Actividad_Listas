@@ -1,10 +1,20 @@
+from empty import Empty
 class lista_enlazada:
     """Clase que implementa una lista enlazada"""
     class nodo:
+      """Clase que implementa un nodo
+      """
       __slots__='element','next'
-      def __init__(self,elemento,next) -> None:
-         self.element=elemento
-         self.next=next
+      def __init__(self,elemento:any,next:any) -> None:
+        """constructor of the class 'nodo'
+
+        :param elemento: the element to save into the information field of the nodo
+        :type elemento: any 
+        :param next: pointer to point to the next element in the list
+        :type next: any
+        """
+        self.element=elemento
+        self.next=next
          
     def __init__(self) -> None:
        self.head=None
@@ -53,7 +63,23 @@ class lista_enlazada:
           return current_nodo
         current_nodo=current_nodo.next
       return None
-        
+    
+    def delete_head(self)->None:
+      if self.is_empty():
+        raise Empty
+      self.size-=1
+      self.head=self.head.next
+    
+    def delete_tail(self)->None:
+      if self.is_empty():
+        raise Empty
+      current_nodo=self.head
+      while current_nodo.next != self.tail:
+        current_nodo=current_nodo.next
+      current_nodo.next=None
+      self.tail=current_nodo
+      self.size-=1
+      
     def __str__(self) -> str:
       current_nodo=self.head
       cadena=''
@@ -68,15 +94,20 @@ if __name__=='__main__':
   l1=lista_enlazada()
   print(l1.is_empty())
   l1.add_head(2)
-  print(len(l1))
   l1.add_head(23)
-  print(len(l1))
   l1.add_head(3444)
   l1.add_head(2000)
   l1.add_tail(21221)
   print(l1)
-  print(l1.get_head())
-  print(l1.get_tail())
+  print('obteniendo la cabeza',l1.get_head())
+  print('obteniendo la cola',l1.get_tail())
   resultado=l1.search(12)
   resultado2=l1.search(23)
   print(resultado,resultado2.element,sep='  ')
+  print('tamaño de la lista',len(l1))
+  l1.delete_head()
+  print('elimine la cabeza , ahora el tamaño de la lista',len(l1))
+  print(l1)
+  l1.delete_tail()
+  print(l1)
+  
