@@ -92,18 +92,24 @@ class lista_enlazada:
       self.tail=current_nodo
       self.size-=1
       
-    def delete(self,element:any)->None:
+    def delete(self,element:any)->nodo:
       if self.is_empty():
         raise Empty
       elif self.search(element)==None:
         return 'No se encontró el Nodo'
+      elif self.head.element==element:
+        return self.pop()
+      elif self.tail.element==element:
+        aux=self.tail
+        self.delete_tail()
+        return aux
       current_nodo=self.head
       while current_nodo.element != element:
         aux=current_nodo
         borr=current_nodo.next
         current_nodo=current_nodo.next
-      aux2=aux.next.next
-      aux.next=aux2
+      aux.next = borr.next
+      self.size-=1
       return borr
       
     def __str__(self) -> str:
@@ -149,6 +155,7 @@ if __name__=='__main__':
   l1.delete_tail()
   print(l1)
   nodoe=l1.delete('keyler')
-  print(l1,' //elemento eliminado = ',nodoe.element,)
+  print(l1,' //elemento eliminado = ',nodoe.element)
   l1.delete(2)
-  print(l1)
+  print(l1,'// elemento eliminado 2')
+  print(l1,'tamaño actual',len(l1))
