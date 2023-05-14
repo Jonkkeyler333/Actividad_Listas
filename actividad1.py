@@ -27,6 +27,9 @@ class lista_enlazada:
     def get_head(self)->nodo:
       return str(self.head.element)+' apunta hacia ->'+str(self.head.next.element)
     
+    def get_tail(self)->nodo:
+      return str(self.tail.element)
+    
     def add_tail(self,elemento)->None:
       new_nodo=lista_enlazada.nodo(elemento,None)
       if self.is_empty():
@@ -36,6 +39,21 @@ class lista_enlazada:
       self.tail=new_nodo
       self.size+=1
       
+    def search(self,value)->nodo:
+      """This method search a nodo in a linkedList 
+
+      :param value: the value of the nodo to search
+      :type value: any type
+      :return: if the function find the value , return the nodo , but , if not , return None
+      :rtype: nodo
+      """
+      current_nodo=self.head
+      while current_nodo:
+        if current_nodo.element==value:
+          return current_nodo
+        current_nodo=current_nodo.next
+      return None
+        
     def __str__(self) -> str:
       current_nodo=self.head
       cadena=''
@@ -58,3 +76,7 @@ if __name__=='__main__':
   l1.add_tail(21221)
   print(l1)
   print(l1.get_head())
+  print(l1.get_tail())
+  resultado=l1.search(12)
+  resultado2=l1.search(23)
+  print(resultado,resultado2.element,sep='  ')
