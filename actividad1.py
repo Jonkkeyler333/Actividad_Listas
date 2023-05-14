@@ -1,9 +1,13 @@
 class lista_enlazada:
+    """Clase que implementa una lista enlazada"""
     class nodo:
       __slots__='element','next'
       def __init__(self,elemento,next) -> None:
          self.element=elemento
          self.next=next
+         
+      def __str__(self) -> str:
+        return self.element+'->'+self.next
            
     def __init__(self) -> None:
        self.head=None
@@ -22,6 +26,9 @@ class lista_enlazada:
         self.tail=new_nodo
       self.head=new_nodo
       self.size+=1
+      
+    def get_head(self)->nodo:
+      pass
     
     def add_tail(self,elemento)->None:
       new_nodo=lista_enlazada.nodo(elemento,None)
