@@ -53,7 +53,7 @@ class lista_enlazada:
       self.tail=new_nodo
       self.size+=1
       
-    def search(self,value)->nodo:
+    def search(self,value:any)->nodo:
       """This method search a nodo in a linkedList 
 
       :param value: the value of the nodo to search
@@ -67,6 +67,10 @@ class lista_enlazada:
           return current_nodo
         current_nodo=current_nodo.next
       return None
+    
+    def add(self,element:any)->None:
+      new_nodo=lista_enlazada.nodo(element)
+      pass
     
     def delete_head(self)->None:
       if self.is_empty():
